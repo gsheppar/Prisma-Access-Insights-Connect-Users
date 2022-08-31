@@ -3,7 +3,9 @@ import requests
 import sys
 import os
 import json
+import csv 
 import prisma_settings
+from datetime import datetime
                                   
 try:
     from prisma_settings import INSIGHTS_API
@@ -43,12 +45,32 @@ def current_connected_users():
         api_response = api_request.json()
         users = api_response["data"]
         if users:
-            for item in users:
-                print(item)
+            
+            print("Found " + str(len(users)) + " connected users")
+            
+            csv_columns = []
+            for key in users[0]:
+                csv_columns.append(key)
+                
+            time = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
+    
+            csv_file = "connected_users_" + time + ".csv"
+            try:
+                with open(csv_file, 'w', encoding='utf-8') as csvfile:
+                    writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+                    writer.writeheader()
+                    for data in users:
+                        try:
+                            writer.writerow(data)
+                        except:
+                            print("Failed to write data for row")
+                    print("Saved " + csv_file + " file")
+            except IOError:
+                print("CSV Write Failed")
         else:
-            print("No current users found")
+            print("No connected users found")
     else:
-        print("API query failed to get current users lists")
+        print("API query failed to get current connected users lists")
     
     return()
 

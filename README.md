@@ -1,5 +1,5 @@
 # Prisma Access Insights Connect Users (Preview)
-The purpose of this script is to print out a list of Connect GP Users
+The purpose of this script is to export a list of Connect GP Users to a csv
 
 #### License
 MIT
