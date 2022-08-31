@@ -28,4 +28,4 @@ MIT
 
 
 #### For more info
- * Get help and additional Prisma Access Documentation at <https://docs.paloaltonetworks.com/prisma/cloudgenix-sd-wan.html>
+ * Get help and additional Prisma Access Documentation at <https://pan.dev/sase/>
